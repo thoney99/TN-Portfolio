@@ -11,6 +11,10 @@
         grid-template-columns: 1fr;
     }
 
+    header.open {
+      border-bottom: 1px solid var(--text-color);
+    }
+
     .header-content {
       width: 100%;
     }
@@ -97,15 +101,17 @@
         height: 37px;
     }
 
-    #close-btn {
-        top: unset;
-        bottom: 12px;
-        right: unset;
-        left: 50svw;
-        transform: translate(-50%, 0);
-        z-index: 99;
-        text-align: center;
+    .screensaver-backdrop {
+      width: 100svw;
     }
+
+
+    #close-btn {
+      position: fixed;
+      top: calc(100svh - 56px);
+      right: 24px;
+      z-index: 99;
+      }
 
     #index-btn {
         display: none;
@@ -142,6 +148,11 @@
         margin-bottom: 12px;
       }
 
+      .grid-item video {
+        height: calc((100svw - 24px) * 0.667);
+        margin-bottom: 12px;
+      }
+
       .overlay-content {
         width: 100vw;
         box-sizing: border-box;
@@ -154,6 +165,17 @@
         flex-direction: column;
       }
 
+      .overlay-footer {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 0 12px 12px;
+      }
+
+      .overlay-footer a {
+        padding: 0;
+      }
+
       .overlay-content-leftcolumn {
         width: 100%;
       }
@@ -164,8 +186,13 @@
         gap: 12px;
       }
 
+      #project-footer-table {
+        width: 100%;
+      }
+
       #project-footer-table tr {
         height: fit-content;
+        grid-template-columns: 1fr 2fr;
         /* The generic `tr { min-height: var(--td-height); }` rule above (meant
            for #index-table's 4-column mobile layout) matches every <tr> on
            the page, including this table's — and min-height always wins over
@@ -221,11 +248,16 @@
         object-fit: cover;
       }
 
-      #project-intro-img,
-      #project-intro-video {
+      #project-intro-img {
         width: 100%;
-        height: calc(100% * 0.667);
+        height: calc(100svh * 0.667);
       }
+
+      #project-intro-video {
+        width: 100svw;
+        height: auto;
+      }
+
 
       .project-intro #project-description {
         width: 100%;

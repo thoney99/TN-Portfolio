@@ -94,6 +94,17 @@ function setHeaderBioOpen(isOpen) {
   }
 }
 
+function closeHeaderImmediately() {
+  const bio = document.getElementById("bio");
+  const educationExperience = document.getElementById("education-experience");
+
+  header.classList.remove("open");
+  bio.classList.remove("bio-revealed");
+  educationExperience.classList.remove("bio-revealed");
+  bio.classList.add("bio-collapsed");
+  educationExperience.classList.add("bio-collapsed");
+}
+
 function closeBio() {
     main.addEventListener("click", (event) => {
       if (event.target.closest("footer")) return;
@@ -277,13 +288,37 @@ const projectYearEl = document.getElementById("project-year");
 const projectTypeEl = document.getElementById("project-type");
 const projectTechnicalEl = document.getElementById("project-technical");
 
+function overlayLineSpacing(total, rowSize, isMobile) {
+  const preferred = 48;
+  if (!isMobile || total < 2) return preferred;
+
+  const closeBtn = document.getElementById("close-btn");
+  const rightLimit = closeBtn
+    ? closeBtn.getBoundingClientRect().left - 8
+    : window.innerWidth - 16;
+  const center = window.innerWidth / 2;
+  const halfLimit = Math.min(center - 16, rightLimit - center);
+  const endUnits = (Math.min(rowSize, total) - 1) / 2;
+  if (endUnits <= 0) return preferred;
+
+  const fitted = (halfLimit - 6) / endUnits;
+  return Math.min(preferred, Math.max(20, fitted));
+}
+
 function dotsIntoLine(dots) {
-  const spacing = 48;
-  const middle = (dots.length - 1) / 2;
+  const total = dots.length;
+  const isMobile = window.innerWidth <= 767;
+  const rowSize = Math.ceil(total / (isMobile ? 2 : 1)) || 1;
+  const spacing = overlayLineSpacing(total, rowSize, isMobile);
+  const rowGap = 24;
+
   dots.forEach((dot, i) => {
-    const offset = (i - middle) * spacing;
-    dot.style.left = `calc(50% + ${offset}px)`;
-    dot.style.top = `24px`;
+    const row = Math.floor(i / rowSize);
+    const indexInRow = i % rowSize;
+    const countInRow = Math.min(rowSize, total - row * rowSize);
+    const middle = (countInRow - 1) / 2;
+    dot.style.left = `calc(50% + ${(indexInRow - middle) * spacing}px)`;
+    dot.style.top = `${24 + row * rowGap}px`;
   });
 }
 
@@ -338,7 +373,7 @@ function dotsIntoGrid(dots) {
           dot.style.top = `${rowY + window.scrollY}px`;
         } else if (viewWidth <= 767) {
           dot.style.left = `18px`;
-          dot.style.top = `calc(${elHeight - 14}px + ${i * (elHeight - 24)}px)`;
+          dot.style.top = `calc(${elHeight - 13}px + ${i * (elHeight - 24)}px)`;
         }
     });
 }
@@ -1058,6 +1093,8 @@ function initScreensaver() {
 }
 
 async function init() {
+  if (window.innerWidth <= 767) closeHeaderImmediately();
+
   const projects = await loadJSON();
   projectsById = Object.fromEntries(projects.map((p) => [p.id, p]));
   const windowsSizeManagerInstance = windowsSizeManager();
@@ -1081,6 +1118,9 @@ async function init() {
 
   window.onresize = () => {
     heightCellValue = windowsSizeManagerInstance.setHeightCellValue();
+    if (overlay.classList.contains("active")) {
+      dotsIntoLine(document.querySelectorAll(".dot"));
+    }
     if ((indexBtn.classList.contains("active")) && (!overlay.classList.contains("active"))) {
         dotsIntoIndex(document.querySelectorAll(".dot"));
     }

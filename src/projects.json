@@ -56,13 +56,13 @@
       "categoryID": ["graphic", "experience"],
       "categoryName": ["Graphic design", "Experience design"],
       "technical": "Figma",
-    "year": "2026"
+    "year": "2025"
     },
       {
         "id": "4",
         "title": "Rume Penolu",
         "description": "A poster on the writings of Elicura Chihuailaf. His work had been selected as part of the Paisajes Poéticos de Chile project. The poster symbolises an identity carrying through the veil imposed by colonialism, political repression and systemic racism. It has been selected to be displayed permanently at the Suizpacio in Santiago de Chile, the cultural space of the Swiss embassy.",
-        "label": "After Elicura Chihuailaf",
+        "label": "Xerox poetry",
         "coverImg": "src/img/Website-CoverImages-RumePenolu01.webp",
         "images": [
           "src/img/09_Neyroud_Thomas.jpg",
@@ -130,7 +130,7 @@
         "id": "8",
         "title": "Yours to Play and Win",
         "description": "BA diploma project involved the creation and communication of the Crowlista Mono typeface. The glyphs are interactive both physically, with a wooden chess set, and digitally, with a website. It refers to Duchamp’s conception of chess pieces as the « block alphabet which shapes thoughts ». ",
-        "label": "About Marcel",
+        "label": "Merci Marcel",
         "coverImg": "src/img/YTPW_01.jpg",
             "images": [
           "src/img/YTPW_01.jpg",
@@ -164,7 +164,7 @@
           "categoryID": ["graphic", "experience"],
           "categoryName": ["Graphic design", "Experience design"],
           "technical": "HTML/CSS/JavaScript",
-          "year": "2023"
+          "year": "2026"
       },
       {
         "id": "10",
@@ -184,7 +184,7 @@
           "categoryID": ["graphic", "experience"],
           "categoryName": ["Graphic design", "Experience design"],
           "technical": "InDesign, Interviews, Editorial direction, Copywriting, Digital printing",
-          "year": "2023"
+          "year": "2021"
       },
       {
         "id": "11",
