@@ -428,7 +428,8 @@
     animation: fadeIn 0.3s ;
   }
 
-  .project-accordion img { position: relative; }
+  .project-accordion img,
+  .project-accordion video { position: relative; }
 
   #accordion-container {
     position: absolute;
@@ -445,7 +446,8 @@
     height: 100%;
   }
 
-  .accordion-cover img {
+  .accordion-cover img,
+  .accordion-cover video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -597,7 +599,8 @@
     margin: 12px 0 24px 0;
   }
 
-  #project-intro-img {
+  #project-intro-img,
+  #project-intro-video {
     width: 100svw;
     height: 100svh;
     object-fit: cover;
@@ -868,7 +871,8 @@
     pointer-events: auto;
   }
 
-  .grid-item img {
+  .grid-item img,
+  .grid-item video {
     width: 100%;
     height: calc((25vw - 84px) * 0.667);
     object-fit: cover;
@@ -900,7 +904,8 @@
     align-items: center;
   }
 
-  .project-image img {
+  .project-image img,
+  .project-image video {
     height: 100%;
     max-height: calc(100svh - 24px);
     width: auto;

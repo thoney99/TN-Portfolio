@@ -230,6 +230,9 @@ function showPreview(project, dot) {
   dot.style.zIndex = "100";
 
   const coverImgSrc = project.coverImg;
+  const coverMedia = project.coverVideo
+    ? `<video src="${project.coverVideo}" poster="${coverImgSrc}" autoplay muted loop playsinline></video>`
+    : `<img src="${coverImgSrc}">`;
   const accordionImgs = [imgSrc, ...imgsArray.slice(0, 3)];
   // const accordionHTML = accordionImgs
   //   .map((src, i) => {
@@ -242,7 +245,7 @@ function showPreview(project, dot) {
   //   })
   //   .join('');
   const accordionHTML = `<div class="accordion-cover">
-      <img src="${coverImgSrc}">
+      ${coverMedia}
     </div>`;
   accordionContainer.innerHTML = `
       <div class="project-accordion">${accordionHTML}</div>`;
@@ -268,6 +271,7 @@ function hidePreview(dot) {
 const projectTitleEl = document.getElementById("project-title");
 const projectDescriptionEl = document.getElementById("project-description");
 const projectIntroImgEl = document.getElementById("project-intro-img");
+const projectIntroVideoEl = document.getElementById("project-intro-video");
 const projectFooterTitleEl = document.getElementById("project-footer-title");
 const projectYearEl = document.getElementById("project-year");
 const projectTypeEl = document.getElementById("project-type");
@@ -405,7 +409,81 @@ function renderExplorationTrail() {
   updateTrailVisibility();
 }
 
+function projectMedia(entry) {
+  if (entry && typeof entry === "object") {
+    if (entry.video) {
+      return { kind: "video", src: entry.video, poster: entry.poster || "" };
+    }
+    return { kind: "image", src: entry.image || entry.src || "" };
+  }
+
+  const src = String(entry ?? "");
+  if (/\.(mp4|webm|mov)(?:$|[?#])/i.test(src)) {
+    return { kind: "video", src, poster: "" };
+  }
+  return { kind: "image", src };
+}
+
+function projectColumnItemHTML(entry) {
+  const media = projectMedia(entry);
+  if (media.kind === "video") {
+    const poster = media.poster ? ` poster="${media.poster}"` : "";
+    return `<div class="project-image"><video src="${media.src}"${poster} muted loop playsinline></video></div>`;
+  }
+  return `<div class="project-image"><img src="${media.src}"></div>`;
+}
+
+function setProjectColumnVideosPlaying(playing) {
+  document.querySelectorAll(".project-images video").forEach((video) => {
+    if (playing) {
+      const playPromise = video.play();
+      if (playPromise) playPromise.catch(() => {});
+    } else {
+      video.pause();
+    }
+  });
+}
+
+function showProjectIntro(project) {
+  if (project.coverVideo) {
+    projectIntroImgEl.hidden = true;
+    projectIntroVideoEl.hidden = false;
+    projectIntroVideoEl.poster = project.coverImg;
+    if (projectIntroVideoEl.getAttribute("src") !== project.coverVideo) {
+      projectIntroVideoEl.src = project.coverVideo;
+    }
+    const playPromise = projectIntroVideoEl.play();
+    if (playPromise) playPromise.catch(() => {});
+    return;
+  }
+
+  hideProjectIntroVideo();
+  projectIntroImgEl.hidden = false;
+  projectIntroImgEl.src = project.coverImg;
+}
+
+function hideProjectIntroVideo() {
+  projectIntroVideoEl.pause();
+  projectIntroVideoEl.hidden = true;
+  projectIntroVideoEl.removeAttribute("src");
+  projectIntroVideoEl.load();
+}
+
+function setGridCoverVideosPlaying(playing) {
+  grid.querySelectorAll("video").forEach((video) => {
+    if (playing) {
+      const playPromise = video.play();
+      if (playPromise) playPromise.catch(() => {});
+    } else {
+      video.pause();
+    }
+  });
+}
+
 function restoreFloatLayout() {
+  hideProjectIntroVideo();
+  setProjectColumnVideosPlaying(false);
+  setGridCoverVideosPlaying(false);
   overlay.classList.remove("active");
   document.documentElement.classList.remove("overlay-open");
   syncHeaderLayer();
@@ -429,6 +507,9 @@ function restoreFloatLayout() {
 }
 
 function restoreIndexLayout() {
+  hideProjectIntroVideo();
+  setProjectColumnVideosPlaying(false);
+  setGridCoverVideosPlaying(false);
   overlay.classList.remove("active");
   document.documentElement.classList.remove("overlay-open");
   syncHeaderLayer();
@@ -450,6 +531,8 @@ function restoreIndexLayout() {
 }
 
 function restoreGridLayout() {
+  hideProjectIntroVideo();
+  setProjectColumnVideosPlaying(false);
   overlay.classList.remove("active");
   document.documentElement.classList.remove("overlay-open");
   syncHeaderLayer();
@@ -464,6 +547,7 @@ function restoreGridLayout() {
   gridBtn.classList.add("active");
   floatBtn.classList.remove("active");
   indexBtn.classList.remove("active");
+  setGridCoverVideosPlaying(true);
   setTimeout(() => {
     updateProjectPage(null);
   }, 605);
@@ -528,18 +612,16 @@ function showProjectPage(project, dot) {
     // Descriptions are our own authored content, not user input, so this is
     // safe.
     projectDescriptionEl.innerHTML = project.description;
-    projectIntroImgEl.src = project.coverImg;
+    showProjectIntro(project);
+    setGridCoverVideosPlaying(false);
     // projectFooterTitleEl.textContent = project.title;
     projectYearEl.textContent = project.year;
     projectTypeEl.textContent = getCategoryNames(project);
     projectTechnicalEl.textContent = project.technical;
 
     const imgContainer = document.querySelector(".project-images");
-    imgContainer.innerHTML = project.images.map((img) => `
-      <div class="project-image">
-        <img src="${img}">
-      </div>
-    `).join("");
+    imgContainer.innerHTML = project.images.map(projectColumnItemHTML).join("");
+    setProjectColumnVideosPlaying(true);
 
     updateProjectPage(project);
   }
@@ -613,11 +695,16 @@ function renderTable(projects, i) {
       });
       // console.log(classString);
 
-      const zIndex = project.images.length - i; // first = highest
-      const imgsHTML = project.images
-        .slice(0, 4) // ← max 4
+      const thumbs = project.images
+        .map((entry) => {
+          const media = projectMedia(entry);
+          return media.kind === "image" ? media.src : "";
+        })
+        .filter(Boolean)
+        .slice(0, 4); // ← max 4
+      const imgsHTML = thumbs
         .map((src, i) => {
-          const zIndex = project.images.length - i; // first = highest
+          const zIndex = thumbs.length - i; // first = highest
           return `<span class="index-img-wrap" style="z-index: ${zIndex}">
                           <img src="${src}" class="index-img">
                         </span>`;
@@ -660,9 +747,12 @@ function renderGrid(projects) {
       categories.forEach((cat) => {
         classString += `${cat}-row `
       });
+        const coverMedia = project.coverVideo
+          ? `<video src="${project.coverVideo}" poster="${project.coverImg}" muted loop playsinline></video>`
+          : `<img src="${project.coverImg}">`;
         return `
             <div class="grid-item ${classString}" data-project-id="${project.id}">
-                <img src="${project.coverImg}">
+                ${coverMedia}
                 <h3>${project.title}</h3>
             </div>
         `;
@@ -694,6 +784,7 @@ function makeIndex() {
   const dots = document.querySelectorAll(".dot");
 
   indexBtn.addEventListener("click", () => {
+    setGridCoverVideosPlaying(false);
 
     if (
       explorationTrailSvg.classList.contains("is-visible") && 
@@ -759,6 +850,7 @@ function makeGrid() {
         
                 dotsIntoGrid(dots);
                 scrollProjectPageToTop()
+                setGridCoverVideosPlaying(true);
                 }, 605);
             setTimeout(() => grid.classList.add("active"), 900);    
         } else {
@@ -774,6 +866,7 @@ function makeGrid() {
         
                 dotsIntoGrid(dots);
                 scrollProjectPageToTop()
+                setGridCoverVideosPlaying(true);
             setTimeout(() => grid.classList.add("active"), 605);
     
         }
@@ -784,6 +877,7 @@ function makeFloat() {
   const dots = document.querySelectorAll(".dot");
 
   floatBtn.addEventListener("click", () => {
+    setGridCoverVideosPlaying(false);
     indexTable.classList.remove("active"); // start fadeout NOW
 
     tableContainer.style.display = "none";

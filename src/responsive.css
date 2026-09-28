@@ -213,14 +213,16 @@
         width: 100%;
       }
 
-      .project-image img {
+      .project-image img,
+      .project-image video {
         height: auto;
         max-height: calc(100vh - 24px);
         width: 100%;
         object-fit: cover;
       }
 
-      #project-intro-img {
+      #project-intro-img,
+      #project-intro-video {
         width: 100%;
         height: calc(100% * 0.667);
       }
