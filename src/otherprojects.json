@@ -1,0 +1,14 @@
+{
+  "id": "3",
+  "title": "Medway",
+  "label": "Made of heavy metal",
+  "description": "Medway is a geometric sans serif typeface. The original inspirations were Johnston and Gill Sans. This explains certain british design references (M, t, f, S & s, …) and an overall humanistic feeling. In order to advance into a transitional proposition, Frutiger’s Avenir & his eponymous font served as a basis for the refinement of the design. This resulted in high legibility and rational choices. As a result, Medway bears the mark of a humanistic approach to metal type design whilst incorporating modernist principles. The typeface is inviting and uplifting, though serious and efficient nonetheless.",
+  "coverImg": "src/img/TN-260603-TD-Title01.png",
+      "images": [
+    "src/img/web-med-02.webp",
+    "src/img/web-med-03.webp"
+  ],
+    "categoryID": "type",
+    "categoryName": "Type design",
+    "year": "2026"
+}

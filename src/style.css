@@ -1,0 +1,1088 @@
+  /* META */
+
+@font-face {
+    font-family: 'Medway';
+    src: url('../public/fonts/Medway-Regular.woff2') format('woff2');
+    font-feature-settings: "ss09";
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Medway Schoolbook';
+    src: url('../public/fonts/Medway-Schoolbook-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Crow';
+    src: url('../public/fonts/Crowlista-Light.otf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Crow Mono';
+    src: url('../public/fonts/Crowlista-Mono-Light.otf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Crow Mono Ita';
+    src: url('../public/fonts/Crowlista-Mono-Light-Italic.otf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  :root {
+    --bg-color: #f5f5f3;
+    --text-color: #090909;
+    --text-color-light: #09090940;
+    --primary-color: #090909;
+    --accent-color: rgb(0, 153, 255);
+    --font-family: 'Medway', sans-serif;
+    --font-size: 18px;
+    --font-size-small: 0.85rem;
+    --line-height: 116%;
+    --border-radius: 0px;
+    --transition-slow: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    --transition-dots: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    --transition-fast: all 0.3s ease-in-out;
+    --overlay-width: 80svw;
+
+    --type-color: rgb(125, 90, 230);
+    --graphic-color: rgb(90, 230, 130);
+    --experience-color: rgb(255, 180, 0);
+    --td-height: 200px;
+  }
+  
+  ::-moz-selection { /* Code for Firefox */
+    color: var(--bg-color);
+    background: var(--accent-color);
+  }
+  
+  ::selection {
+    color: var(--bg-color);
+    background: var(--accent-color);
+  } 
+  
+  body {
+    height: fit-content;
+    width: 100svw;
+    margin: 0;
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    color: var(--text-color);
+    background: var(--bg-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    scroll-behavior: smooth;
+
+    overflow-x: hidden;
+  }
+  
+  * {
+    font-weight: normal;
+    box-sizing: border-box;
+  }
+
+  *::selection {
+    background: var(--accent-color);
+  }
+
+  main {
+    width: 100svw;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* LAYOUT */
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100svw;
+    height: fit-content;
+    z-index: 200;
+    padding: 24px;
+    background: transparent;
+
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 24px;
+
+    /* Transparent by default (not `none`) so toggling .scrolled only
+       transitions the border's color, not its width — avoiding a 1px
+       layout shift when it appears. */
+    border-bottom: 1px solid transparent;
+
+    transition: var(--transition-fast);
+
+    pointer-events: none;
+
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+  }
+
+  header.open.scrolled {
+    border-bottom: 1px solid var(--text-color);
+  }
+
+  /* .header-content {
+    transition: var(--transition-fast);
+  } */
+
+  .name-btn {
+    cursor: pointer;
+    /* transition: var(--transition-fast); */
+    pointer-events: auto;
+  }
+
+  .name-btn:hover {
+    color: var(--accent-color);
+  }
+
+  #bio {
+    transition: var(--transition-fast);
+  }
+
+  /* Opacity/pointer-events drive the fade; layout collapse (display: none) is
+     applied separately via .bio-collapsed once the fade-out finishes, so the
+     text fades out at the same speed as the rest of the header instead of
+     snapping away instantly. */
+  .bio-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .bio-revealed {
+    opacity: 1;
+    display: inline;
+    pointer-events: auto;
+  }
+
+  .bio-collapsed {
+    display: none;
+  }
+
+  header.project-open {
+    opacity: 0;
+    z-index: 3;
+  }
+
+  header.open {
+    background: var(--bg-color);
+    height: fit-content;
+
+    pointer-events: auto;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    /* transition: var(--transition-fast); */
+  }
+
+  a:hover {
+    color: var(--accent-color);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  #education-experience {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    column-gap: 0.5em;
+    row-gap: 0.25em;
+    align-items: baseline;
+
+    transition: var(--transition-fast);
+  }
+
+  /* Higher specificity than the base rule above so it still collapses the
+     layout once .bio-collapsed is applied after the fade-out completes. */
+  #education-experience.bio-collapsed {
+    display: none;
+  }
+
+  .education-experience-heading {
+    grid-column: 1 / -1;
+    margin-bottom: 0.75em;
+  }
+
+  #education-experience span:not(.education-experience-heading) {
+    line-height: calc(var(--font-size) * 1.16);
+  }
+
+  .education-experience-year {
+    font-size: calc(var(--font-size) * 0.8);
+    font-feature-settings: "tnum", "case" on;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0svh;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    z-index: 1;
+    padding: 24px;
+
+    font-size: .8rem;
+    font-family: 'Medway Schoolbook';
+    
+    pointer-events: none;
+  }
+
+  footer button {
+    pointer-events: auto;
+  }
+
+  .link-text:hover {
+    cursor: pointer;
+    /* transition: var(--transition-fast); */
+  }
+
+  #type-link:hover,
+  #type-link.is-active        { color: var(--type-color); }
+  #graphic-link:hover,
+  #graphic-link.is-active     { color: var(--graphic-color); }
+  #experience-link:hover,
+  #experience-link.is-active  { color: var(--experience-color); }
+  
+#preview-label-container {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    width: 100%;
+
+    font-family: 'Medway';
+    font-size: var(--font-size);
+    text-align: left;
+
+    opacity: 0;
+
+    transition: all 0.3s ease;
+  }
+
+  #preview-label-container.visible {
+    opacity: 1;
+  }
+
+  .dots-container {
+    position: absolute;
+    inset: 0;
+    overflow: visible;
+    width: 100%;
+    height: 100%;
+
+    z-index: 99;
+
+    pointer-events: none;
+  }
+
+  #exploration-trail {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  #exploration-trail.is-visible {
+    opacity: 1;
+  }
+
+  #exploration-trail polyline {
+    fill: none;
+    stroke: var(--primary-color);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+
+  #screensaver-trail {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  #screensaver-trail.active {
+    opacity: 1;
+  }
+
+  #screensaver-trail path {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+
+    font-size: 3rem;
+    font-family: 'Crow';
+    text-align: center;
+
+    background: var(--primary-color);
+    z-index: 2;
+
+    transition: top 0.5s cubic-bezier(0.22, 1, 0.36, 1), left 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease, background 0s ease-in-out;
+
+    outline: 1px solid var(--bg-color);
+
+    pointer-events: auto;
+  }
+
+  .dot:hover {
+    cursor: pointer;
+  }
+
+  /* Tinted state: hover preview, category filter, or explored project */
+  .dot.is-graphic.is-hovered,
+  .dot.is-graphic.matches-filter,
+  .dot.is-graphic.is-visited    { background: var(--graphic-color); outline: 1px solid var(--bg-color);}
+
+  .dot.is-type.is-hovered,
+  .dot.is-type.matches-filter,
+  .dot.is-type.is-visited       { background: var(--type-color); outline: 1px solid var(--bg-color);}
+
+  .dot.is-experience.is-hovered,
+  .dot.is-experience.matches-filter,
+  .dot.is-experience.is-visited { background: var(--experience-color); outline: 1px solid var(--bg-color);}
+
+  /* Two-category mixes (split disc) */
+  .dot.is-graphic.is-type:not(.is-experience).is-hovered,
+  .dot.is-graphic.is-type:not(.is-experience).matches-filter,
+  .dot.is-graphic.is-type:not(.is-experience).is-visited {
+    background: linear-gradient(90deg, var(--graphic-color) 50%, var(--type-color) 50%);
+    outline: 1px solid var(--bg-color);
+  }
+
+  .dot.is-graphic.is-experience:not(.is-type).is-hovered,
+  .dot.is-graphic.is-experience:not(.is-type).matches-filter,
+  .dot.is-graphic.is-experience:not(.is-type).is-visited {
+    background: linear-gradient(90deg, var(--graphic-color) 50%, var(--experience-color) 50%);
+    outline: 1px solid var(--bg-color);
+  }
+
+  .dot.is-type.is-experience:not(.is-graphic).is-hovered,
+  .dot.is-type.is-experience:not(.is-graphic).matches-filter,
+  .dot.is-type.is-experience:not(.is-graphic).is-visited {
+    background: linear-gradient(90deg, var(--type-color) 50%, var(--experience-color) 50%);
+    outline: 1px solid var(--bg-color);
+  }
+
+  /* Three-category mix */
+  .dot.is-graphic.is-type.is-experience.is-hovered,
+  .dot.is-graphic.is-type.is-experience.matches-filter,
+  .dot.is-graphic.is-type.is-experience.is-visited {
+    background: linear-gradient(
+      90deg,
+      var(--graphic-color) 0 33.33%,
+      var(--type-color) 33.33% 66.66%,
+      var(--experience-color) 66.66% 100%
+    );
+    outline: 1px solid var(--bg-color);
+  }
+
+  .project-accordion {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    animation: fadeIn 0.3s ;
+  }
+
+  .project-accordion img { position: relative; }
+
+  #accordion-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: calc(50vw * 0.667);
+    z-index: 0;
+  }
+
+  .accordion-cover {
+    width: 100%;
+    height: 100%;
+  }
+
+  .accordion-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    border-radius: var(--border-radius);
+  }
+
+  /* .overlay is position: absolute (anchored to the document, one
+     100svh-tall box at the top of the page), not position: fixed to the
+     viewport. If the page underneath (index/grid) is taller than one
+     viewport and the visitor scrolls past that box while the overlay is
+     open, they scroll straight past the overlay and see the index/grid
+     underneath. Locking document scrolling while the overlay is active
+     keeps the overlay covering the whole viewport for as long as it's
+     open; .overlay's own overflow-y: scroll below still scrolls normally. */
+  html.overlay-open,
+  html.overlay-open body {
+    overflow: hidden;
+  }
+
+  .overlay {
+    background: var(--bg-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100svw;
+    height: 100svh;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0;
+
+    overflow-y: scroll;
+
+    transition: var(--transition-fast);
+  }
+
+  .overlay.active {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  .overlay-content {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: fit-content;
+    z-index: 50;
+
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    padding: 24px;
+    box-sizing: border-box;
+
+    scroll-snap-align: start;
+  }
+
+  .overlay-content-leftcolumn {
+    width: 50%;
+    height: auto;
+  }
+
+  .left-column-content {
+    position: sticky;
+    top: 24px;
+    width: 100%;
+    height: fit-content;
+  }
+
+  .overlay-content-rightcolumn {
+    width: 50%;
+    height: 100%;
+  }
+
+  .spacer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    height: 96px;
+    width: 100%;
+    background: var(--bg-color);
+  }
+
+  .overlay-content.crowlista {
+    font-family: "Crow";
+  }
+
+  .overlay-content.schoolbook {
+    font-family: "Medway Schoolbook";
+  }
+
+  .overlay-content.crowmono {
+    font-family: "Crow Mono";
+  }
+
+  .overlay-footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+
+    height: fit-content;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 24px;
+    padding: 0 24px 24px;
+  }
+
+  .overlay-footer-el {
+    font-family: 'Medway';
+    text-align: left;
+
+    font-size: var(--font-size-small);
+  }
+
+  .overlay-footer a {
+    padding-left: 12px;
+
+    font-size: var(--font-size-small);
+  }
+
+  #project-title {
+    background: var(--bg-color);
+    bottom: 0;
+    width: 100%;
+    height: fit-content;
+    font-size: 5rem;
+    line-height: 5rem;
+    text-align: left;
+  }
+
+  .project-intro {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .project-intro #project-description {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    font-size: var(--font-size);
+    line-height: 120%;
+    text-align: left;
+
+    margin: 12px 0 24px 0;
+  }
+
+  #project-intro-img {
+    width: 100svw;
+    height: 100svh;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+  }
+
+  footer {
+    display: flex;
+    flex-direction: row;
+    flex-direction: row-reverse;
+    gap: 12px;
+  }
+
+  .btn {
+    height: 26px;
+    background: var(--bg-color);
+    border: 1px solid var(--text-color);
+    padding: 6px;
+    color: var(--text-color);
+    font-family: 'Medway Schoolbook';
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+    /* transition: var(--transition-fast); */
+    z-index: 99;
+  }
+
+  .btn:hover {
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    cursor: pointer;
+  }
+
+  .btn.active {
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+  }
+
+  #close-btn {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 99;
+  }
+
+  #table-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100svw;
+
+    padding-top: 33svh;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  #index-table {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 100vw;
+    height: 0px;
+    border-collapse: collapse;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition-slow);
+  }
+
+  #index-table.active {
+    opacity: 1;
+    pointer-events: auto;
+    height: fit-content;
+  }
+
+  table tr { 
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    width: 100%;
+
+    height: var(--td-height);
+    border-top: 1px solid var(--text-color);
+    /* transition: var(--transition-slow); */
+    cursor: pointer;
+  }
+
+  table tr:first-child {
+    border-top: none !important;
+  }
+
+  tr td:first-child {
+    font-size: var(--font-size);
+    /* font-family: 'Medway'; */
+    text-align: left;
+  }
+
+  table td {
+    vertical-align: top;
+    padding: 12px 0px;
+  }
+
+  table td:nth-child(1) {
+    padding: 12px 48px;
+  }
+
+  table td:nth-child(2) {
+    padding: 0 48px;
+  }
+
+#index-table tr:last-child {
+    border-bottom: none;
+  }
+
+  tr:hover .index-img-wrap {
+    margin-left: -24px;
+  }
+
+  .graphic-row:hover,
+  .graphic-row.is-hovered {
+    color: var(--graphic-color);
+  }
+
+  .experience-row:hover,
+  .experience-row.is-hovered {
+    color: var(--experience-color);
+  }
+
+  .type-row:hover,
+  .type-row.is-hovered {
+    color: var(--type-color);
+  }
+
+  .graphic-row.experience-row:hover,
+  .graphic-row.experience-row.is-hovered {
+    background: linear-gradient(90deg, var(--graphic-color) 50%, var(--experience-color) 50%);
+    -webkit-background-clip: text;
+    background-clip: text;
+-webkit-text-fill-color: transparent;
+
+  }
+
+  .graphic-row.type-row:hover,
+  .graphic-row.type-row.is-hovered {
+    background: linear-gradient(90deg, var(--graphic-color) 50%, var(--type-color) 50%);
+    -webkit-background-clip: text;
+    background-clip: text;
+-webkit-text-fill-color: transparent;
+
+  } 
+
+  .experience-row.type-row:hover,
+  .experience-row.type-row.is-hovered {
+    background: linear-gradient(90deg, var(--type-color) 50%, var(--experience-color) 50%);
+    -webkit-background-clip: text;
+    background-clip: text;
+-webkit-text-fill-color: transparent;
+
+  } 
+
+  .graphic-row.experience-row.type-row:hover,
+  .graphic-row.experience-row.type-row.is-hovered {
+    background: linear-gradient(
+      90deg,
+      var(--graphic-color) 0 33.33%,
+      var(--type-color) 33.33% 66.66%,
+      var(--experience-color) 66.66% 100%
+    );
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .index-imgs {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    gap: 6px;
+  }
+
+  .index-img-wrap {
+    display: inline-block;
+    overflow: hidden;            /* clips the blur halo */
+    border-radius: var(--border-radius);
+    width: 24px;
+    height: calc(var(--td-height) - 24px);
+    margin-left: -48px;
+    align-self: center;
+
+    transition: var(--transition-fast);
+  }
+  
+  .index-imgs .index-img-wrap:nth-child(1) {
+    width: calc(var(--td-height) - 24px);
+    margin-left: 0;
+  }
+  
+  .index-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: blur(5px);
+  }
+  
+  .index-imgs .index-img-wrap:nth-child(1) .index-img {
+    filter: none;
+  }
+
+  #grid-container {
+    position: absolute;
+    top: 20vh;
+    left: 0;
+    width: 100svw;
+    height: calc(100svh - 20vh);
+
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    box-sizing: border-box;
+
+    transition: var(--transition-slow);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px;
+    padding: 48px;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition-slow);
+  }
+
+  #grid-container.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .grid.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .grid-item {
+    height: fit-content;
+
+    padding-left: 24px;
+    padding-top: 24px;
+
+    display: inline-block;
+
+    /* opacity: 0;
+    pointer-events: none; */
+    /* transition: var(--transition-fast); */
+  }
+
+  .grid-item.is-hovered {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .grid-item img {
+    width: 100%;
+    height: calc((25vw - 84px) * 0.667);
+    object-fit: cover;
+    display: block;
+
+    margin-bottom: 12px;
+  }
+
+  .grid-item:hover {
+    cursor: pointer;
+  }
+
+  .project-images {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: flex-start;
+  }
+
+  .project-image {
+    max-height: calc(100svh - 24px);
+    max-width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .project-image img {
+    height: 100%;
+    max-height: calc(100svh - 24px);
+    width: auto;
+    max-width: 100%;
+    object-fit: cover;
+  }
+
+  .project-footer {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .project-footer-title-container {
+    width: 50%;
+    height: fit-content;
+  }
+  
+  #project-footer-table {
+    width: 50%;
+    height: fit-content;
+    border-collapse: collapse;
+    border-top: 1px solid var(--text-color-light);
+  }
+
+  #project-footer-table tr {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    width: 100%;
+    height: fit-content;
+    border-top: 1px solid var(--text-color-light);
+    cursor: default;
+    padding: 6px 0px;
+  }
+
+  #project-footer-table td {
+    vertical-align: top;
+    padding: 0;
+
+    font-size: var(--font-size-small);
+  }
+
+  /* SCREENSAVER */
+
+  .illustrations {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 24px;
+  }
+
+  #screensaver-illustrations {
+    position: absolute;
+    height: fit-content;
+    top: 24px;
+    inset: 0;
+    z-index: 503;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+  }
+
+  #screensaver-illustrations.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .illustrations img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    margin: 12px;
+  }
+
+  .screensaver-backdrop {
+    position: fixed;
+    inset: 0;
+    background: #000000;
+    z-index: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+  }
+
+  .screensaver-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .screensaver-clock {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    width: 80svw;
+    transform: translateX(-50%);
+    z-index: 502;
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Medway Schoolbook';
+    font-size: 1rem;
+    line-height: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+  }
+
+  .screensaver-clock.active {
+    opacity: 1;
+  }
+
+  /* .dots-container is normally position: absolute against the document
+     (it has to stay put under the float/index/grid layouts, which assume
+     document coordinates). That means its 0–100% coordinate space is
+     anchored to the top of the page, not to whatever the user has scrolled
+     to. Switching it to position: fixed only while the screensaver is
+     active re-anchors that same 0–100% space to the current viewport, so
+     the spiral of dots and the trail stay centred on screen regardless of
+     scroll position — without touching window scroll at all, so it can't
+     desync from the float view's expected (unscrolled) position. */
+  body.screensaver-active .dots-container {
+    position: fixed;
+    inset: 0;
+    z-index: 501;
+  }
+
+  body.screensaver-active header,
+  body.screensaver-active footer,
+  body.screensaver-active .content-container,
+  body.screensaver-active .overlay,
+  body.screensaver-active #grid-container,
+  body.screensaver-active #table-container,
+  body.screensaver-active #exploration-trail {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  body.screensaver-active .dot {
+    outline: 1px solid #ffffff;
+  }
+
+  body.screensaver-active .dot.is-graphic    { background: var(--graphic-color); }
+  body.screensaver-active .dot.is-type       { background: var(--type-color); }
+  body.screensaver-active .dot.is-experience { background: var(--experience-color); }
+
+  body.screensaver-active .dot.is-graphic.is-type:not(.is-experience) {
+    background: linear-gradient(90deg, var(--graphic-color) 50%, var(--type-color) 50%);
+  }
+
+  body.screensaver-active .dot.is-graphic.is-experience:not(.is-type) {
+    background: linear-gradient(90deg, var(--graphic-color) 50%, var(--experience-color) 50%);
+  }
+
+  body.screensaver-active .dot.is-type.is-experience:not(.is-graphic) {
+    background: linear-gradient(90deg, var(--type-color) 50%, var(--experience-color) 50%);
+  }
+
+  body.screensaver-active .dot.is-graphic.is-type.is-experience {
+    background: linear-gradient(
+      90deg,
+      var(--graphic-color) 0 33.33%,
+      var(--type-color) 33.33% 66.66%,
+      var(--experience-color) 66.66% 100%
+    );
+  }
+
+  /* TESTING ONLY: remove before shipping */
+  #screensaver-debug-timer {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 9999;
+    padding: 4px 8px;
+    background: rgba(255, 0, 0, 0.85);
+    color: #ffffff;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1;
+    pointer-events: none;
+  }

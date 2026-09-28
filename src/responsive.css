@@ -1,0 +1,293 @@
+@media (max-width: 767px) {
+    ::root {
+        --font-size: 18px;
+        --line-height: calc(18px * 1.16);
+        --overlay-width: 100%;
+    }
+
+    header {
+        width: 100svw;
+        padding: 12px;
+        grid-template-columns: 1fr;
+    }
+
+    .header-content {
+      width: 100%;
+    }
+
+    header .header-content:last-child {
+      margin-bottom: 24px;
+    }
+
+    #screensaver-illustrations {
+      top: 24px;
+    }
+
+    .illustrations img {
+      width: 100px;
+      height: 100px;
+      margin: 0px;
+    }
+
+    .education-experience-year {
+      font-size: 12px;
+    }
+
+    #accordion-container {
+        width: calc(100svw - 24px);
+        height: calc((100svw - 24px) * 0.667);
+      }
+
+      #preview-label-container {
+        bottom: 96px;
+      }
+
+
+
+    #project-title {
+        padding: 12px;
+        font-size: 4rem;
+        line-height: 4rem;
+    }
+
+    .graphic-row, .experience-row, .type-row {
+        grid-template-columns: 3fr 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    tr {
+        line-height: 1.2rem;
+        height: auto;
+        min-height: var(--td-height);
+    }
+
+    tr td:first-child {
+        grid-column: 1;
+        grid-row: 1;
+        padding-bottom: 0;
+    }
+
+    table td:nth-child(2) {
+        padding: 0 12px;
+        align-items: center;
+        grid-column: 2;
+        grid-row: 1 / span 2;
+    }
+
+    tr td:nth-child(3) {
+        display: none;
+    }
+    
+    tr td:nth-child(4) {
+        display: block;
+        grid-column: 1;
+        grid-row: 2;
+        padding: 4px 48px 12px;
+        align-self: flex-end;
+    }
+
+    footer {
+        padding: 12px;
+        width: 100svw;
+    }
+
+    .btn {
+        font-size: var(--font-size);
+        line-height: var(--line-height);
+        height: 37px;
+    }
+
+    #close-btn {
+        top: unset;
+        bottom: 12px;
+        right: unset;
+        left: 50svw;
+        transform: translate(-50%, 0);
+        z-index: 99;
+        text-align: center;
+    }
+
+    #index-btn {
+        display: none;
+    }
+
+    #grid-container {
+        padding: 0 0px;
+        top: 0;
+        left: 0;
+        transform: translate(0, 0);
+        justify-content: flex-start;
+
+        padding-top: 48px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 12px;
+        padding: 0;
+      }
+
+      .grid-item h3 {
+        text-indent: 32px;
+      }
+    
+      .grid-item {
+        padding-left: 0;
+        padding-top: 0;
+        margin-bottom: 12px;
+      }
+
+      .grid-item img {
+        height: calc((100svw - 24px) * 0.667);
+        margin-bottom: 12px;
+      }
+
+      .overlay-content {
+        width: 100vw;
+        box-sizing: border-box;
+        left: 0;
+
+        padding: 12px;
+
+        gap: 12px;
+
+        flex-direction: column;
+      }
+
+      .overlay-content-leftcolumn {
+        width: 100%;
+      }
+
+      .left-column-content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      #project-footer-table tr {
+        height: fit-content;
+        /* The generic `tr { min-height: var(--td-height); }` rule above (meant
+           for #index-table's 4-column mobile layout) matches every <tr> on
+           the page, including this table's — and min-height always wins over
+           a smaller `height`/fit-content, no matter what that's set to. That
+           was the actual cause of the oversized rows: reset the floor here. */
+        min-height: 0;
+      }
+
+      #project-footer-table td {
+        height: fit-content;
+      }
+
+      /* Same story: this generic selector above is meant to lay out
+         #index-table's rows (label row + thumbnail row spanning two grid
+         rows). It also matches this table's 2nd <td> and forces it to span
+         a 2nd, empty implicit grid row it doesn't need. */
+      #project-footer-table td:nth-child(2) {
+        grid-row: auto;
+      }
+
+      .overlay-content-rightcolumn {
+        width: 100%;
+      }
+
+      .project-images {
+        width: 100%;
+        height: 100%;
+      }
+
+      .project-image {
+        width: 100%;
+        height: 100%;
+      }
+
+      #project-title {
+        padding: 0;
+      }
+
+      .project-intro #project-description {
+        margin: 0;
+      }
+
+      .project-image {
+        height: fit-content;
+        width: 100%;
+      }
+
+      .project-image img {
+        height: auto;
+        max-height: calc(100vh - 24px);
+        width: 100%;
+        object-fit: cover;
+      }
+
+      #project-intro-img {
+        width: 100%;
+        height: calc(100% * 0.667);
+      }
+
+      .project-intro #project-description {
+        width: 100%;
+        left: 0;
+      }
+    
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    ::root {
+        --font-size: 18px;
+        --overlay-width: 100%;
+    }
+
+    #grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        padding: 0 24px;
+      }
+
+      .grid-item {
+        flex: 0 0 calc((100% - 24px) / 2); /* 2 × 24px gap */
+    
+        margin-bottom: 48px;
+      }
+
+      .grid-item img {
+        width: 100%;
+        height: calc(50svw * 1.25);
+
+        margin-bottom: 24px;
+      }
+}
+
+@media (pointer: coarse) {
+    #name:hover {
+        color: inherit;
+    }
+
+    a:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    #type-link:hover,
+    #type-link.is-active        { color: inherit; }
+    #graphic-link:hover,
+    #graphic-link.is-active     { color: inherit; }
+    #experience-link:hover,
+    #experience-link.is-active  { color: inherit; }
+  
+    tr:hover .index-img-wrap {
+        margin-left: -48px;
+      }
+
+      .graphic-row:hover {
+        color: inherit;
+      }
+    
+      .experience-row:hover {
+        color: inherit;
+      }
+    
+      .type-row:hover {
+        color: inherit;
+      }
+}
