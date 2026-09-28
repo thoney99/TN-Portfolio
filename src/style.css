@@ -1071,18 +1071,3 @@
       var(--experience-color) 66.66% 100%
     );
   }
-
-  /* TESTING ONLY: remove before shipping */
-  #screensaver-debug-timer {
-    position: fixed;
-    top: 12px;
-    right: 12px;
-    z-index: 9999;
-    padding: 4px 8px;
-    background: rgba(255, 0, 0, 0.85);
-    color: #ffffff;
-    font-family: monospace;
-    font-size: 12px;
-    line-height: 1;
-    pointer-events: none;
-  }
