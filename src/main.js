@@ -30,7 +30,6 @@ const screensaverTrailPath = screensaverTrailSvg.querySelector("path");
 const screensaverBackdrop = document.getElementById("screensaver-backdrop");
 const screensaverClock = document.getElementById("screensaver-clock");
 const screensaverIllustrations = document.getElementById("screensaver-illustrations");
-const screensaverDebugTimer = document.getElementById("screensaver-debug-timer"); // TESTING ONLY: remove before shipping
 let viewWidth = window.innerWidth;
 
 let projectsById = {};
@@ -805,7 +804,7 @@ function makeFloat() {
 }
 
 // SCREENSAVER
-const SCREENSAVER_IDLE_MS = 30000; // 30 seconds
+const SCREENSAVER_IDLE_MS = 60000; // 30 seconds
 const SCREENSAVER_TIMEZONE = "Europe/Zurich"; // Lausanne
 let lastActivityTime = Date.now();
 let isScreensaverActive = false;
@@ -925,17 +924,6 @@ function exitScreensaver() {
   restoreDotsLayout();
 }
 
-// TESTING ONLY: remove before shipping
-function updateScreensaverDebugTimer() {
-  if (!screensaverDebugTimer) return;
-  if (isScreensaverActive) {
-    screensaverDebugTimer.textContent = "screensaver: active";
-    return;
-  }
-  const remainingMs = Math.max(0, SCREENSAVER_IDLE_MS - (Date.now() - lastActivityTime));
-  screensaverDebugTimer.textContent = `screensaver in: ${(remainingMs / 1000).toFixed(1)}s`;
-}
-
 function checkScreensaverIdle() {
   if (!isScreensaverActive && Date.now() - lastActivityTime >= SCREENSAVER_IDLE_MS) {
     enterScreensaver();
@@ -973,7 +961,6 @@ function initScreensaver() {
   });
 
   setInterval(checkScreensaverIdle, 1000);
-  setInterval(updateScreensaverDebugTimer, 100); // TESTING ONLY: remove before shipping
 }
 
 async function init() {
