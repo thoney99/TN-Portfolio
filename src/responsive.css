@@ -263,6 +263,10 @@
         width: 100%;
         left: 0;
       }
+
+      #more-btn {
+        display: none;
+      }
     
 }
 

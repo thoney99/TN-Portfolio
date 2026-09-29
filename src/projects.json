@@ -110,24 +110,6 @@
       },    
       {
         "id": "7",
-        "title": "Medway Schoolbook",
-        "description": "This companion to the Medway brings a warmer feel, with details inspired by schoolbook typefaces (open 4, flicked a and d, serif I and J, …). It complements the family to cover a wide range of applications, from serious tones to playful uses.",
-        "label": "Back to skool!",
-        "coverImg": "src/img/Website-CoverImages-Schoolbook-01.png",
-            "images": [
-          "src/img/web-andr-01.webp",
-          "src/img/web-andr-02.webp",
-          "src/img/web-andr-03.webp",
-          "src/img/web-andr-04.webp",
-          "src/img/web-andr-05.webp"
-        ],
-          "categoryID": "type",
-          "categoryName": "Type design",
-          "technical": "Glyphs App",
-          "year": "2026"
-      },
-      {
-        "id": "8",
         "title": "Yours to Play and Win",
         "description": "BA diploma project involved the creation and communication of the Crowlista Mono typeface. The glyphs are interactive both physically, with a wooden chess set, and digitally, with a website. It refers to Duchamp’s conception of chess pieces as the « block alphabet which shapes thoughts ». ",
         "label": "Merci Marcel",
@@ -147,27 +129,7 @@
           "year": "2023"
       },
       {
-        "id": "9",
-        "title": "Type Finder",
-        "description": "Type Finder uses direct manipulation as an alternative to current tools for typeface search. An asemic glyph, variable on five axes, allows designers to sketch the formal characteristics of the type of font they are looking for. Contextual component states help build strong affordances that guide the user naturally through the interface.",
-        "label": "Assume form",
-        "coverImg": "src/img/Neyroud_Thomas_MicroUI_04.png",
-        "coverVideo": "src/video/Neyroud_Thomas_MicroUI_Video_01-compressed.mp4",
-            "images": [
-          "src/img/Neyroud_Thomas_MicroUI_01.png",
-          "src/img/Neyroud_Thomas_MicroUI_02.png",
-          "src/img/Neyroud_Thomas_MicroUI_03.png",
-          "src/img/Neyroud_Thomas_MicroUI_05.png",
-          "src/img/Neyroud_Thomas_MicroUI_06.png",
-          "src/img/Neyroud_Thomas_MicroUI_07.png"
-        ],
-          "categoryID": ["graphic", "experience"],
-          "categoryName": ["Graphic design", "Experience design"],
-          "technical": "HTML/CSS/JavaScript",
-          "year": "2026"
-      },
-      {
-        "id": "10",
+        "id": "8",
         "title": "ad hoc.",
         "description": "This magazine was produced with <a href=\"https://www.instagram.com/edge_stavros/\" target=\"_blank\" rel=\"noopener noreferrer\">Stavros Gialamidis</a> in 2021. It focused on artistic spaces, whether they were about exhibitions or practice. It contained interviews of Yves Dana, Alexandru Balgiù and Eliot Möwes, as well as a visual essay by Louis Victorin Michel and in-house texts and images.",
         "label": "In other words",
@@ -187,7 +149,7 @@
           "year": "2021"
       },
       {
-        "id": "11",
+        "id": "9",
         "title": "Rectify",
         "description": "Rectify is a prototype of a record store tool that provides the visitors with intentionnally incomplete information about their record selection. Tracks snippets, short description, credits. Just enough to know a little, without giving away the pleasure of finding out when unpacking the vinyl. It was made in collaboration with <a href=\"https://rishab.ch/\" target=\"_blank\" rel=\"noopener noreferrer\">Rishab Sachidanand</a>.",
         "label": "A digger’s quest",
@@ -210,7 +172,7 @@
           "year": "2026"
       },
       {
-        "id": "12",
+        "id": "10",
         "title": "Reckoner",
         "description": "Reckoner is a note taking and comparison tool. It is a vocal-driven software working on mobile with barely any UI. It accompanies or replaces on-paper annotations and lets the reader speak their mind as they’re reading while minimising the digital presence and distractions. It removes the manual transcription step to build a digital collection of annotations and uses cross-referencing to suggest links between the existing notes upon processing.",
         "label": "Look ma, no hands ÷)",

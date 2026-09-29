@@ -211,8 +211,6 @@
   #education-experience {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    column-gap: 0.5em;
-    row-gap: 0.25em;
     align-items: baseline;
 
     transition: var(--transition-fast);
@@ -226,11 +224,12 @@
 
   .education-experience-heading {
     grid-column: 1 / -1;
-    margin-bottom: 0.75em;
+    margin-bottom: 1.2em;
   }
 
   #education-experience span:not(.education-experience-heading) {
     line-height: calc(var(--font-size) * 1.16);
+    height: fit-content;
   }
 
   .education-experience-year {
@@ -560,13 +559,16 @@
   .overlay-footer-el {
     font-family: 'Medway';
     text-align: left;
+    height: fit-content;
+    line-height: 100%;
 
     font-size: var(--font-size-small);
   }
 
   .overlay-footer a {
-    padding-left: 12px;
+    height: fit-content;
 
+    width: fit-content;
     font-size: var(--font-size-small);
     line-height: var(--font-size-small);
   }
@@ -1076,4 +1078,113 @@
       var(--type-color) 33.33% 66.66%,
       var(--experience-color) 66.66% 100%
     );
+  }
+
+  /* JOURNAL */
+
+  #journal-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100svw;
+    height: 100svh;
+
+    background: var(--bg-color);
+    padding: 96px 24px;
+
+    z-index: 504;
+    opacity: 0;
+    overflow-y: scroll;
+    pointer-events: none;
+
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    gap: 96px;
+
+    transition: var(--transition-slow);
+  }
+
+  #journal-container.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #more-btn {
+    position: absolute;
+    right: 24px;
+  }
+
+  #close-journal-btn {
+    position: fixed;
+    left: 24px;
+    bottom: 24px;
+
+    height: fit-content;
+
+    font-size: var(--font-size-small);
+    line-height: var(--font-size-small);
+  }
+
+  .journal-item {
+    width: 100%;
+    height: calc(100svh * 0.667);
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    transition: var(--transition-slow);
+  }
+
+  .journal-item-text {
+    width: 50%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 96px;
+  }
+
+  .journal-item-date {
+    font-family: 'Medway';
+    font-size: var(--font-size-small);
+    line-height: 116%;
+
+    width: 50%;
+
+    opacity: 0.4;
+
+    text-align: right;
+  }
+
+  .journal-item-description {
+    width: 50%;
+    text-align: left;
+    font-family: 'Medway';
+    font-size: var(--font-size-small);
+    line-height: 116%;
+    padding-right: 24px;
+  }
+  
+  .journal-item-image {
+    width: 50%;
+    height: fit-content;
+    max-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+  }
+
+  .journal-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }

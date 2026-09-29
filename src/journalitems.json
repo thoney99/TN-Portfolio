@@ -1,0 +1,16 @@
+{
+    "journalItems": [
+        {
+            "id": "1",
+            "description": "At the best location of ECAL with <a href=\"https://louisroh.ch/\" target=\"_blank\" rel=\"noopener noreferrer\">Louis</a>.",
+            "date": "Sometimes in 2022",
+            "image": "src/img/journal-01.jpg"
+        },
+        {
+            "id": "2",
+            "description": "Discussing letterforms more or less seriously with <a href=\"https://guillaumebesson.ch/\" target=\"_blank\" rel=\"noopener noreferrer\">Guillaume</a> and <a href=\"https://www.nolan-paparelli.ch/\" target=\"_blank\" rel=\"noopener noreferrer\">Nolan</a>.",
+            "date": "18/09/2026",
+            "image": "src/img/journal-02.jpg"
+        }
+    ]
+}

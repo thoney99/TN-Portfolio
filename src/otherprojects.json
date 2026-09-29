@@ -1,4 +1,5 @@
-{
+[
+  {
   "id": "3",
   "title": "Medway",
   "label": "Made of heavy metal",
@@ -11,4 +12,46 @@
     "categoryID": "type",
     "categoryName": "Type design",
     "year": "2026"
+}, 
+
+{
+  "id": "7",
+  "title": "Medway Schoolbook",
+  "description": "This companion to the Medway brings a warmer feel, with details inspired by schoolbook typefaces (open 4, flicked a and d, serif I and J, …). It complements the family to cover a wide range of applications, from serious tones to playful uses.",
+  "label": "Back to skool!",
+  "coverImg": "src/img/Website-CoverImages-Schoolbook-01.png",
+      "images": [
+    "src/img/web-andr-01.webp",
+    "src/img/web-andr-02.webp",
+    "src/img/web-andr-03.webp",
+    "src/img/web-andr-04.webp",
+    "src/img/web-andr-05.webp"
+  ],
+    "categoryID": "type",
+    "categoryName": "Type design",
+    "technical": "Glyphs App",
+    "year": "2026"
+}, 
+
+{
+  "id": "9",
+  "title": "Type Finder",
+  "description": "Type Finder uses direct manipulation as an alternative to current tools for typeface search. An asemic glyph, variable on five axes, allows designers to sketch the formal characteristics of the type of font they are looking for. Contextual component states help build strong affordances that guide the user naturally through the interface.",
+  "label": "Assume form",
+  "coverImg": "src/img/Neyroud_Thomas_MicroUI_04.png",
+  "coverVideo": "src/video/Neyroud_Thomas_MicroUI_Video_01-compressed.mp4",
+      "images": [
+    "src/img/Neyroud_Thomas_MicroUI_01.png",
+    "src/img/Neyroud_Thomas_MicroUI_02.png",
+    "src/img/Neyroud_Thomas_MicroUI_03.png",
+    "src/img/Neyroud_Thomas_MicroUI_05.png",
+    "src/img/Neyroud_Thomas_MicroUI_06.png",
+    "src/img/Neyroud_Thomas_MicroUI_07.png"
+  ],
+    "categoryID": ["graphic", "experience"],
+    "categoryName": ["Graphic design", "Experience design"],
+    "technical": "HTML/CSS/JavaScript",
+    "year": "2026"
 }
+
+]

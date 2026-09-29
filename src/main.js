@@ -1092,6 +1092,47 @@ function initScreensaver() {
   setInterval(checkScreensaverIdle, 1000);
 }
 
+const journalContainer = document.getElementById("journal-container");
+const closeJournalBtn = document.getElementById("close-journal-btn");
+const moreBtn = document.getElementById("more-btn");
+
+
+function showJournal() {
+  journalContainer.classList.add("active");
+}
+
+function hideJournal() {
+  journalContainer.classList.remove("active");
+}
+
+async function loadJournalItems() {
+  const response = await fetch("src/journalitems.json");
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  const { journalItems } = await response.json();
+
+  journalContainer.querySelectorAll(".journal-item").forEach((item) => item.remove());
+
+  const newestFirst = [...journalItems].sort((a, b) => Number(b.id) - Number(a.id));
+
+  newestFirst.forEach((item) => {
+    const journalItem = document.createElement("div");
+    journalItem.classList.add("journal-item");
+    journalItem.innerHTML = `
+      <div class="journal-item-text">
+        <div class="journal-item-date">${item.date}</div>
+        <div class="journal-item-description">${item.description}</div>
+      </div>
+      <div class="journal-item-image">
+        <img src="${item.image}" alt="">
+      </div>
+    `;
+    closeJournalBtn.before(journalItem);
+  });
+}
+
+moreBtn.addEventListener("click", () => showJournal());
+closeJournalBtn.addEventListener("click", () => hideJournal());
+
 async function init() {
   if (window.innerWidth <= 767) closeHeaderImmediately();
 
@@ -1115,7 +1156,7 @@ async function init() {
   bindHeaderScrollBorder();
   makeGrid();
   initScreensaver();
-
+  loadJournalItems();
   window.onresize = () => {
     heightCellValue = windowsSizeManagerInstance.setHeightCellValue();
     if (overlay.classList.contains("active")) {
