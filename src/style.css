@@ -175,7 +175,7 @@
 
   .bio-revealed {
     opacity: 1;
-    display: inline;
+    /* display: inline; */
     pointer-events: auto;
   }
 
