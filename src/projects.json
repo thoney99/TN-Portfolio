@@ -151,7 +151,7 @@
       {
         "id": "9",
         "title": "Rectify",
-        "description": "Rectify is a prototype of a record store tool that provides the visitors with intentionnally incomplete information about their record selection. Tracks snippets, short description, credits. Just enough to know a little, without giving away the pleasure of finding out when unpacking the vinyl. It was made in collaboration with <a href=\"https://rishab.ch/\" target=\"_blank\" rel=\"noopener noreferrer\">Rishab Sachidanand</a>.",
+        "description": "Rectify is a prototype of a record store tool that provides the visitors with intentionnally incomplete information about their record selection. Tracks snippets, short description, credits. Just enough to know a little, without giving away the pleasure of finding out when unpacking the vinyl, which always remains the core experience of the record. It works as a complementary tool to the store owners and workers, whose personal knowledge is not replaced. Finding this balance to protect the beauty of sharing and discovering was key in our thinking. This naturally meant staying away from features such as algorithmic recommendations. It was made in collaboration with <a href=\"https://rishab.ch/\" target=\"_blank\" rel=\"noopener noreferrer\">Rishab Sachidanand</a>.",
         "label": "A digger’s quest",
         "coverImg": "src/img/Rectify-01.webp",
             "images": [
@@ -174,7 +174,7 @@
       {
         "id": "10",
         "title": "Reckoner",
-        "description": "Reckoner is a note taking and comparison tool. It is a vocal-driven software working on mobile with barely any UI. It accompanies or replaces on-paper annotations and lets the reader speak their mind as they’re reading while minimising the digital presence and distractions. It removes the manual transcription step to build a digital collection of annotations and uses cross-referencing to suggest links between the existing notes upon processing.",
+        "description": "Reckoner is a note taking and comparison tool. It is a vocal-driven software working on mobile with barely any UI. It accompanies or replaces on-paper annotations and lets the reader speak their mind as they’re reading while minimising the digital presence and distractions. It removes the manual transcription step to build a digital collection of annotations and uses cross-referencing to suggest links between the existing notes upon processing. It does not try to replace the writing experience, but to support the flow of reading and store material for later development, editing and analysis.",
         "label": "Look ma, no hands ÷)",
         "coverImg": "src/img/Reckoner-04.webp",
             "images": [
