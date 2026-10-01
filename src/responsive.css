@@ -168,7 +168,7 @@
       .overlay-footer {
         grid-template-rows: 1fr 1fr;
         grid-template-columns: 1fr;
-        gap: 0;
+        gap: 1px;
         padding: 0 12px 12px;
       }
 
