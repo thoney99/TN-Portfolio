@@ -3,7 +3,6 @@
 @font-face {
     font-family: 'Medway';
     src: url('../public/fonts/Medway-Regular.woff2') format('woff2');
-    font-feature-settings: "ss09";
     font-weight: normal;
     font-style: normal;
   }
