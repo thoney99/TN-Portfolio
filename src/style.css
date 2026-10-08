@@ -52,7 +52,7 @@
     --primary-color: #090909;
     --accent-color: rgb(0, 153, 255);
     --font-family: 'Medway', sans-serif;
-    --font-size: 18px;
+    --font-size: 16px;
     --font-size-small: 0.85rem;
     --line-height: 116%;
     --border-radius: 0px;
@@ -149,6 +149,10 @@
   /* .header-content {
     transition: var(--transition-fast);
   } */
+
+  #bio-container {
+    max-width: 600px;
+  }
 
   .name-btn {
     cursor: pointer;
@@ -504,7 +508,7 @@
   }
 
   .overlay-content-leftcolumn {
-    width: 50%;
+    width: 33%;
     height: auto;
   }
 
@@ -516,7 +520,7 @@
   }
 
   .overlay-content-rightcolumn {
-    width: 50%;
+    width: 67%;
     height: 100%;
   }
 
@@ -550,8 +554,8 @@
     height: fit-content;
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    grid-template-columns: 1fr 2fr;
+    gap: 12px;
     padding: 0 24px 24px;
   }
 
@@ -577,8 +581,8 @@
     bottom: 0;
     width: 100%;
     height: fit-content;
-    font-size: 5rem;
-    line-height: 5rem;
+    font-size: var(--font-size);
+    line-height: var(--font-size);
     text-align: left;
   }
 
@@ -621,10 +625,11 @@
     background: var(--bg-color);
     border: 1px solid var(--text-color);
     padding: 6px;
+    border-radius: 2px;
     color: var(--text-color);
     font-family: 'Medway Schoolbook';
-    font-size: 0.9rem;
-    line-height: 0.9rem;
+    font-size: var(--font-size-small);
+    line-height: var(--font-size-small);
     /* transition: var(--transition-fast); */
     z-index: 99;
   }
@@ -919,8 +924,14 @@
     width: 100%;
     height: fit-content;
     display: flex;
-    flex-direction: row;
-    gap: 24px;
+    flex-direction: column;
+  }
+
+
+  .project-info-name {
+    font-size: var(--font-size);
+    line-height: var(--font-size);
+    opacity: 0.5;
   }
 
   .project-footer-title-container {
