@@ -36,7 +36,7 @@
         ],
           "categoryID": "graphic",
           "categoryName": "Graphic design",
-          "technical": "InDesign, Runway ML GAN, Photoshop, Inkjet + Laser printing",
+          "technical": "GAN, Photoshop, Drawing, Inkjet + Laser printing",
           "year": "2020"
       },    
     {
@@ -70,7 +70,7 @@
         ],
           "categoryID": "graphic",
           "categoryName": "Graphic design",
-          "technical": "Copy machine, Photoshop, Plotter printing",
+          "technical": "Xerox, Photoshop",
           "year": "2022"
       },    
       {
@@ -125,7 +125,7 @@
         ],
           "categoryID": ["type", "graphic", "experience"],
           "categoryName": ["Type design", "Graphic design", "Experience design"],
-          "technical": "Glyphs App, Indesign, Woodworking, Digital printing, HTML/CSS/JavaScript",
+          "technical": "Glyphs App, Indesign, Woodworking, Digital printing, Code",
           "year": "2023"
       },
       {
@@ -186,7 +186,7 @@
         ],
           "categoryID": ["graphic", "experience"],
           "categoryName": ["Graphic design", "Experience design"],
-          "technical": "HTML/CSS/JavaScript",
+          "technical": "Code",
           "year": "2026"
       }
   ]}
