@@ -143,8 +143,8 @@
           "src/img/web-adhoc-06.webp",
           "src/img/web-adhoc-07.webp"
         ],
-          "categoryID": ["graphic", "experience"],
-          "categoryName": ["Graphic design", "Experience design"],
+          "categoryID": "graphic",
+          "categoryName": "Graphic design",
           "technical": "InDesign, Interviews, Editorial direction, Copywriting, Digital printing",
           "year": "2021"
       },
