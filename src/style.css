@@ -270,6 +270,10 @@
   #graphic-link.is-active     { color: var(--graphic-color); }
   #experience-link:hover,
   #experience-link.is-active  { color: var(--experience-color); }
+
+  #experience-link, #type-link, #graphic-link {
+    cursor: default;
+  }
   
 #preview-label-container {
     position: absolute;
@@ -621,13 +625,16 @@
   }
 
   .btn {
-    height: 26px;
-    background: var(--bg-color);
-    border: 1px solid var(--text-color);
-    padding: 6px;
-    border-radius: 2px;
+    /* height: 26px; */
+    /* background: var(--bg-color); */
+    /* border: 1px solid var(--text-color); */
+    height: fit-content;
+    background: none;
+    border: none;
+    /* padding: 6px; */
+    /* border-radius: 2px; */
     color: var(--text-color);
-    font-family: 'Medway Schoolbook';
+    font-family: 'Medway';
     font-size: var(--font-size-small);
     line-height: var(--font-size-small);
     /* transition: var(--transition-fast); */
@@ -636,13 +643,36 @@
 
   .btn:hover {
     color: var(--accent-color);
-    border: 1px solid var(--accent-color);
+    /* border: 1px solid var(--accent-color); */
     cursor: pointer;
   }
 
-  .btn.active {
+  /* .btn.active {
     color: var(--accent-color);
     border: 1px solid var(--accent-color);
+  } */
+
+  .btn-letter {
+    display: inline-block;
+    transform: translate(0, 0) rotate(0deg);
+    transition: color 0.15s ease, transform 0.2s ease;
+  }
+
+  .btn:hover .btn-letter,
+  .btn.active .btn-letter {
+    color: var(--letter-color, var(--accent-color));
+    transform: translate(var(--twitch-x, 1px), var(--twitch-y, -1px)) rotate(var(--twitch-rot, 4deg));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-letter {
+      transition: color 0.15s ease;
+    }
+
+    .btn:hover .btn-letter,
+    .btn.active .btn-letter {
+      transform: none;
+    }
   }
 
   #close-btn {
@@ -650,6 +680,8 @@
     top: 24px;
     right: 24px;
     z-index: 99;
+
+    text-shadow: 2px 0 30px #ffffff;
   }
 
   #table-container {

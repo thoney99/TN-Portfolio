@@ -1133,8 +1133,73 @@ async function loadJournalItems() {
 moreBtn.addEventListener("click", () => showJournal());
 closeJournalBtn.addEventListener("click", () => hideJournal());
 
+const BTN_LETTER_COLORS = [
+  "var(--accent-color)",
+  "var(--type-color)",
+  "var(--graphic-color)",
+  "var(--experience-color)",
+];
+
+function splitButtonLetters(button) {
+  if (button.querySelector(".btn-letter")) return;
+  const text = button.textContent;
+  button.textContent = "";
+  [...text].forEach((char) => {
+    const letter = document.createElement("span");
+    letter.className = "btn-letter";
+    letter.textContent = char;
+    button.appendChild(letter);
+  });
+}
+
+function scrambleButtonLetters(button) {
+  button.querySelectorAll(".btn-letter").forEach((letter) => {
+    const color = BTN_LETTER_COLORS[Math.floor(Math.random() * BTN_LETTER_COLORS.length)];
+    const x = (-1.5 + Math.random() * 3).toFixed(2);
+    const y = (-1.5 + Math.random() * 3).toFixed(2);
+    const rot = (-7 + Math.random() * 14).toFixed(1);
+    letter.style.setProperty("--letter-color", color);
+    letter.style.setProperty("--twitch-x", `${x}px`);
+    letter.style.setProperty("--twitch-y", `${y}px`);
+    letter.style.setProperty("--twitch-rot", `${rot}deg`);
+  });
+}
+
+function resetButtonLetters(button) {
+  button.querySelectorAll(".btn-letter").forEach((letter) => {
+    letter.style.removeProperty("--letter-color");
+    letter.style.removeProperty("--twitch-x");
+    letter.style.removeProperty("--twitch-y");
+    letter.style.removeProperty("--twitch-rot");
+  });
+}
+
+function initButtonLetterHover() {
+  document.querySelectorAll(".btn").forEach((button) => {
+    splitButtonLetters(button);
+    if (button.classList.contains("active")) scrambleButtonLetters(button);
+
+    button.addEventListener("mouseenter", () => {
+      if (!button.classList.contains("active")) scrambleButtonLetters(button);
+    });
+    button.addEventListener("mouseleave", () => {
+      if (!button.classList.contains("active")) resetButtonLetters(button);
+    });
+
+    new MutationObserver(() => {
+      if (button.classList.contains("active")) {
+        const hasColor = button.querySelector(".btn-letter")?.style.getPropertyValue("--letter-color");
+        if (!hasColor) scrambleButtonLetters(button);
+      } else if (!button.matches(":hover")) {
+        resetButtonLetters(button);
+      }
+    }).observe(button, { attributes: true, attributeFilter: ["class"] });
+  });
+}
+
 async function init() {
   if (window.innerWidth <= 767) closeHeaderImmediately();
+  initButtonLetterHover();
 
   const projects = await loadJSON();
   projectsById = Object.fromEntries(projects.map((p) => [p.id, p]));
