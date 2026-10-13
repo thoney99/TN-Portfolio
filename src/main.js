@@ -1145,6 +1145,10 @@ function splitButtonLetters(button) {
   const text = button.textContent;
   button.textContent = "";
   [...text].forEach((char) => {
+    if (char === " ") {
+      button.appendChild(document.createTextNode(" "));
+      return;
+    }
     const letter = document.createElement("span");
     letter.className = "btn-letter";
     letter.textContent = char;

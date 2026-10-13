@@ -643,6 +643,7 @@
 
   .btn:hover {
     color: var(--accent-color);
+    text-decoration: none;
     /* border: 1px solid var(--accent-color); */
     cursor: pointer;
   }
@@ -1161,8 +1162,8 @@
 
   #close-journal-btn {
     position: fixed;
-    left: 24px;
-    bottom: 24px;
+    top: 24px;
+    right: 24px;
 
     height: fit-content;
 
