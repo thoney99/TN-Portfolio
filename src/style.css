@@ -642,7 +642,7 @@
   }
 
   .btn:hover {
-    color: var(--accent-color);
+    /* color: var(--accent-color); */
     text-decoration: none;
     /* border: 1px solid var(--accent-color); */
     cursor: pointer;
@@ -661,7 +661,7 @@
 
   .btn:hover .btn-letter,
   .btn.active .btn-letter {
-    color: var(--letter-color, var(--accent-color));
+    /* color: var(--letter-color, var(--accent-color)); */
     transform: translate(var(--twitch-x, 1px), var(--twitch-y, -1px)) rotate(var(--twitch-rot, 4deg));
   }
 

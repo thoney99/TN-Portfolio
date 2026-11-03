@@ -1133,12 +1133,14 @@ async function loadJournalItems() {
 moreBtn.addEventListener("click", () => showJournal());
 closeJournalBtn.addEventListener("click", () => hideJournal());
 
-const BTN_LETTER_COLORS = [
-  "var(--accent-color)",
-  "var(--type-color)",
-  "var(--graphic-color)",
-  "var(--experience-color)",
-];
+// Letter colours on hover. Uncomment here and the color line in
+// .btn:hover .btn-letter / .btn.active .btn-letter to bring them back.
+// const BTN_LETTER_COLORS = [
+//   "var(--accent-color)",
+//   "var(--type-color)",
+//   "var(--graphic-color)",
+//   "var(--experience-color)",
+// ];
 
 function splitButtonLetters(button) {
   if (button.querySelector(".btn-letter")) return;
@@ -1158,11 +1160,11 @@ function splitButtonLetters(button) {
 
 function scrambleButtonLetters(button) {
   button.querySelectorAll(".btn-letter").forEach((letter) => {
-    const color = BTN_LETTER_COLORS[Math.floor(Math.random() * BTN_LETTER_COLORS.length)];
+    // const color = BTN_LETTER_COLORS[Math.floor(Math.random() * BTN_LETTER_COLORS.length)];
     const x = (-1.5 + Math.random() * 3).toFixed(2);
     const y = (-1.5 + Math.random() * 3).toFixed(2);
     const rot = (-7 + Math.random() * 14).toFixed(1);
-    letter.style.setProperty("--letter-color", color);
+    // letter.style.setProperty("--letter-color", color);
     letter.style.setProperty("--twitch-x", `${x}px`);
     letter.style.setProperty("--twitch-y", `${y}px`);
     letter.style.setProperty("--twitch-rot", `${rot}deg`);
