@@ -1218,6 +1218,13 @@ async function init() {
   makeFloat();
   renderTable(projects);
   renderGrid(projects);
+  accordionContainer.style.display = "none";
+  previewLabel.style.display = "none";
+  tableContainer.style.display = "none";
+  gridContainer.classList.add("active");
+  grid.classList.add("active");
+  dotsIntoGrid(document.querySelectorAll(".dot"));
+  setGridCoverVideosPlaying(true);
   bindCategoryLinks();
   bindIndexRows();
   closeBio();
