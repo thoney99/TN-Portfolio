@@ -72,16 +72,17 @@ function setHeaderBioOpen(isOpen) {
   clearTimeout(headerBioCollapseTimeout);
 
   if (isOpen) {
-    // Re-enter the layout first (still invisible via .bio-hidden), then
-    // fade opacity in on the next frame so the transition actually plays.
+    // display:none -> visible and opacity 0 -> 1 must not happen in one
+    // paint, or the fade has no starting frame and the text just appears.
+    // Reading offsetWidth commits the invisible layout first.
     bio.classList.remove("bio-collapsed");
     educationExperience.classList.remove("bio-collapsed");
+    void bio.offsetWidth;
+    void educationExperience.offsetWidth;
 
-    requestAnimationFrame(() => {
-      bio.classList.add("bio-revealed");
-      educationExperience.classList.add("bio-revealed");
-      header.classList.add("open");
-    });
+    bio.classList.add("bio-revealed");
+    educationExperience.classList.add("bio-revealed");
+    header.classList.add("open");
   } else {
     bio.classList.remove("bio-revealed");
     educationExperience.classList.remove("bio-revealed");
