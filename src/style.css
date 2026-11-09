@@ -712,13 +712,27 @@
 
     opacity: 0;
     pointer-events: none;
-    transition: var(--transition-slow);
   }
 
   #index-table.active {
     opacity: 1;
     pointer-events: auto;
     height: fit-content;
+  }
+
+  #index-table tr {
+    opacity: 0;
+  }
+
+  .grid.active .grid-item,
+  #index-table.active tr {
+    animation: view-fade-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--stagger, 0) * 0.05s);
+  }
+
+  @keyframes view-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   table tr { 
@@ -873,8 +887,6 @@
     justify-content: flex-start;
 
     box-sizing: border-box;
-
-    transition: var(--transition-slow);
   }
 
   .grid {
@@ -885,7 +897,6 @@
 
     opacity: 0;
     pointer-events: none;
-    transition: var(--transition-slow);
   }
 
   #grid-container.active {
@@ -900,6 +911,7 @@
 
   .grid-item {
     height: fit-content;
+    opacity: 0;
 
     padding-left: 24px;
     padding-top: 24px;

@@ -555,7 +555,7 @@ function restoreIndexLayout() {
   tableContainer.style.display = "block";
   gridContainer.classList.remove("active");
   grid.classList.remove("active");
-  indexTable.classList.add("active");
+  replayStagger(indexTable);
   dotsIntoIndex(document.querySelectorAll(".dot"));
   indexBtn.classList.add("active");
   floatBtn.classList.remove("active");
@@ -577,7 +577,7 @@ function restoreGridLayout() {
   previewLabel.style.display = "none";
   tableContainer.style.display = "none";
   gridContainer.classList.add("active");
-  grid.classList.add("active");
+  replayStagger(grid);
   indexTable.classList.remove("active");
   dotsIntoGrid(document.querySelectorAll(".dot"));
   gridBtn.classList.add("active");
@@ -720,10 +720,16 @@ function bindProjectPageClose() {
   });
 }
 
+function replayStagger(element) {
+  element.classList.remove("active");
+  void element.offsetWidth;
+  element.classList.add("active");
+}
+
 function renderTable(projects, i) {
 
   indexTable.innerHTML = projects
-    .map((project) => {
+    .map((project, index) => {
       let categories = getProjectCategories(project);
       let classString = ""
       categories.forEach((cat) => {
@@ -748,7 +754,7 @@ function renderTable(projects, i) {
         .join("");
 
       return `
-            <tr class="${classString}" data-project-id="${project.id}">
+            <tr class="${classString}" data-project-id="${project.id}" style="--stagger: ${index}">
                 <td>${project.title}</td>
                 <td class="index-imgs">${imgsHTML}</td>
                 <td>${getCategoryNames(project)}</td>
@@ -777,7 +783,7 @@ function bindIndexRows() {
 
 function renderGrid(projects) {
   grid.innerHTML = projects
-    .map((project) => {
+    .map((project, index) => {
       let categories = getProjectCategories(project);
       let classString = ""
       categories.forEach((cat) => {
@@ -787,7 +793,7 @@ function renderGrid(projects) {
           ? `<video src="${project.coverVideo}" poster="${project.coverImg}" muted loop playsinline></video>`
           : `<img src="${project.coverImg}">`;
         return `
-            <div class="grid-item ${classString}" data-project-id="${project.id}">
+            <div class="grid-item ${classString}" data-project-id="${project.id}" style="--stagger: ${index}">
                 ${coverMedia}
                 <h3>${project.title}</h3>
             </div>
@@ -843,7 +849,7 @@ function makeIndex() {
             scrollProjectPageToTop()    
         }, 605);
     
-        setTimeout(() => indexTable.classList.add("active"), 900);    
+        setTimeout(() => replayStagger(indexTable), 900);    
     } else {
         indexBtn.classList.add("active");
         floatBtn.classList.remove("active");
@@ -859,7 +865,7 @@ function makeIndex() {
         grid.classList.remove("active")
         scrollProjectPageToTop()    
     
-        setTimeout(() => indexTable.classList.add("active"), 605);    
+        setTimeout(() => replayStagger(indexTable), 605);    
     }
   });
 }
@@ -888,7 +894,7 @@ function makeGrid() {
                 scrollProjectPageToTop()
                 setGridCoverVideosPlaying(true);
                 }, 605);
-            setTimeout(() => grid.classList.add("active"), 900);    
+            setTimeout(() => replayStagger(grid), 900);    
         } else {
             gridBtn.classList.add("active");
             floatBtn.classList.remove("active");
@@ -903,7 +909,7 @@ function makeGrid() {
                 dotsIntoGrid(dots);
                 scrollProjectPageToTop()
                 setGridCoverVideosPlaying(true);
-            setTimeout(() => grid.classList.add("active"), 605);
+            setTimeout(() => replayStagger(grid), 605);
     
         }
       });
@@ -1223,7 +1229,7 @@ async function init() {
   previewLabel.style.display = "none";
   tableContainer.style.display = "none";
   gridContainer.classList.add("active");
-  grid.classList.add("active");
+  replayStagger(grid);
   dotsIntoGrid(document.querySelectorAll(".dot"));
   setGridCoverVideosPlaying(true);
   bindCategoryLinks();
