@@ -641,6 +641,11 @@
     z-index: 99;
   }
 
+  .btn.layout {
+    filter: blur(1px);
+    transition: filter 0.3s var(--transition-fast);
+  }
+
   .btn:hover {
     /* color: var(--accent-color); */
     text-decoration: none;
@@ -648,10 +653,10 @@
     cursor: pointer;
   }
 
-  /* .btn.active {
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-  } */
+  .btn.active {
+    filter: blur(0px);
+    transition: filter 0.3s var(--transition-slow);
+  }
 
   .btn-letter {
     display: inline-block;
@@ -659,11 +664,11 @@
     transition: color 0.15s ease, transform 0.2s ease;
   }
 
-  .btn:hover .btn-letter,
+  /* .btn:hover .btn-letter,
   .btn.active .btn-letter {
-    /* color: var(--letter-color, var(--accent-color)); */
+    color: var(--letter-color, var(--accent-color)); 
     transform: translate(var(--twitch-x, 1px), var(--twitch-y, -1px)) rotate(var(--twitch-rot, 4deg));
-  }
+  } */
 
   @media (prefers-reduced-motion: reduce) {
     .btn-letter {
